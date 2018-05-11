@@ -97,7 +97,7 @@ for con in M_con:
     M_assist,garbage = Assists.split(" ")
     apps = con.find("li",{"class":"apps"}).text
     M_app,garbage2 =  apps.split(" ",1)
-    M_app = R_app.replace("\n","")
+    M_app = M_app.replace("\n","")
     penalty = con.find("ul",{"class":"extras"}).span.text
     missed = con.find("ul",{"class":"extras"}).li.small.text
     M_miss,garbage3 =  missed.split(" ")
@@ -112,7 +112,7 @@ for con in M_con:
     M_Hattricks.append(hattricks)
     M_Missed.append(M_miss)
     M_Penalties.append(penalty)
-    M_Apps.append(R_app)
+    M_Apps.append(M_app)
     M_Assists.append(M_assist)
     M_goal.append(M_goals)
     M_label.append(M_goals_labels)
@@ -129,7 +129,7 @@ M_Hattricks = list(map(int, M_Hattricks))
 
 #*****************Combining all in a data frame***********************************************
 df = pd.DataFrame({'Competition':R_label,'Caps':R_Apps,'Goals':R_goal,'Penalties':R_Penalties,'Missed':R_Missed,'Assists':R_Assists,'Hat-tricks':R_Hattricks,'Goal Ratio':R_GoalRatio})
-df2 = pd.DataFrame({'Competition':M_label,'Caps':R_Apps,'Goals':M_goal,'Penalties':M_Penalties,'Missed':M_Missed,'Assists':M_Assists,'Hat-tricks':M_Hattricks,'Goal Ratio':M_GoalRatio})
+df2 = pd.DataFrame({'Competition':M_label,'Caps':M_Apps,'Goals':M_goal,'Penalties':M_Penalties,'Missed':M_Missed,'Assists':M_Assists,'Hat-tricks':M_Hattricks,'Goal Ratio':M_GoalRatio})
 
 #*********************Exporting to Excel*******************************************************
 df.to_excel('D:\Ronaldo Stats.xlsx', sheet_name='Ronaldo Stats',columns=['Competition','Caps','Goals','Penalties','Missed','Assists','Hat-tricks','Goal Ratio'],index=False)
